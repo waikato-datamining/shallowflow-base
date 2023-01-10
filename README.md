@@ -5,8 +5,8 @@ The base components for shallowflow.
 
 Install via pip:
 
-```commandline
-pip install "git+https://github.com/waikato-datamining/shallowflow.git#egg=shallowflow-base&subdirectory=base"
+```bash
+pip install "git+https://github.com/waikato-datamining/shallowflow-base.git"
 ```
 
 ## Actors
