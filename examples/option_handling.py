@@ -1,13 +1,22 @@
 import os
 import tempfile
 import traceback
+from shallowflow.base.conditions import NumExpr
 from shallowflow.base.sources import DirectoryLister
 from shallowflow.api.io import save_actor, load_actor
-from shallowflow.base.help import PlainText
+from shallowflow.base.help import PlainText, Markdown
 from shallowflow.api.io import Directory
 
-dl = DirectoryLister()
+# non-actor
+ne = NumExpr()
+# print the help string
+print("\n--> help string (plain text)")
+PlainText().generate(ne)
+print("\n--> help string (markdown)")
+Markdown().generate(ne)
 
+# actor
+dl = DirectoryLister()
 # print the help string
 print("\n--> help string")
 PlainText().generate(dl)

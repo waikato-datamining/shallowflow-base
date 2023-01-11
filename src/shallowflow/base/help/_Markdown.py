@@ -1,5 +1,7 @@
-from shallowflow.api.config import Option
 from shallowflow.api.help import AbstractHelpGenerator
+from shallowflow.api.actor import Actor, is_standalone, is_source, is_sink, is_transformer
+from shallowflow.api.compatibility import Unknown
+from shallowflow.api.config import get_class_name
 
 
 class Markdown(AbstractHelpGenerator):
@@ -38,6 +40,19 @@ class Markdown(AbstractHelpGenerator):
             result += indent + part
         return result
 
+    def _type_to_str(self, t):
+        """
+        Turns the flow data type into a string:
+
+        :param t: the data type to turn into a string
+        :return: the generated string
+        :rtype: str
+        """
+        if issubclass(t, Unknown):
+            return "-unknown-"
+        else:
+            return get_class_name(t)
+
     def _do_generate(self, handler):
         """
         Performs the actual generation.
@@ -50,9 +65,23 @@ class Markdown(AbstractHelpGenerator):
         result = "# " + type(handler).__name__ + "\n"
         result += "\n"
 
-        result += "## Description\n"
+        result += "## Name\n"
+        result += get_class_name(handler) + "\n"
+        result += "\n"
+
+        result += "## Synopsis\n"
         result += handler.description() + "\n"
         result += "\n"
+
+        if isinstance(handler, Actor):
+            result += "## Flow input/output\n"
+            if is_standalone(handler):
+                result += "-standalone-\n"
+            elif is_sink(handler) or is_transformer(handler):
+                result += "input: " + ", ".join([self._type_to_str(x) for x in handler.accepts()]) + "\n"
+            elif is_source(handler) or is_transformer(handler):
+                result += "output: " + ", ".join([self._type_to_str(x) for x in handler.generates()]) + "\n"
+            result += "\n"
 
         result += "## Options\n"
         for item in handler.option_manager.options():

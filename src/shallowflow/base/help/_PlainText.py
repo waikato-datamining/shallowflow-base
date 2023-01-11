@@ -1,5 +1,8 @@
 from shallowflow.api.config import Option
 from shallowflow.api.help import AbstractHelpGenerator
+from shallowflow.api.actor import Actor, is_standalone, is_source, is_sink, is_transformer
+from shallowflow.api.compatibility import Unknown
+from shallowflow.api.config import get_class_name
 
 
 class PlainText(AbstractHelpGenerator):
@@ -68,6 +71,19 @@ class PlainText(AbstractHelpGenerator):
             result += indent + part
         return result
 
+    def _type_to_str(self, t):
+        """
+        Turns the flow data type into a string:
+
+        :param t: the data type to turn into a string
+        :return: the generated string
+        :rtype: str
+        """
+        if issubclass(t, Unknown):
+            return "-unknown-"
+        else:
+            return get_class_name(t)
+
     def _do_generate(self, handler):
         """
         Performs the actual generation.
@@ -80,14 +96,32 @@ class PlainText(AbstractHelpGenerator):
         max = self.get("max_width")
         num = self.get("num_indent")
         result = type(handler).__name__ + "\n" \
-                 + "=" * (len(type(handler).__name__)) + "\n\n" \
-                 + self._break(handler.description(), max)
+                 + "=" * (len(type(handler).__name__)) + "\n"
 
+        result += "\nName\n" \
+                  + "----\n" \
+                  + get_class_name(handler) + "\n"
+
+        result += "\nSynopsis\n" \
+                  + "--------\n" \
+                  + self._break(handler.description(), max) + "\n"
+
+        if isinstance(handler, Actor):
+            result += "\nFlow input/output\n"
+            result += "-----------------\n"
+            if is_standalone(handler):
+                result += "-standalone-\n"
+            elif is_sink(handler) or is_transformer(handler):
+                result += self._break("input: " + ", ".join([self._type_to_str(x) for x in handler.accepts()]) + "\n", max)
+            elif is_source(handler) or is_transformer(handler):
+                result += self._break("output: " + ", ".join([self._type_to_str(x) for x in handler.generates()]) + "\n", max)
+
+        if len(handler.option_manager.options()) > 0:
+            result += "\nOptions\n"
+            result += "-------\n"
         for item in handler.option_manager.options():
-            if len(result) > 0:
-                result += "\n\n"
             result += item.name + " (" + str(item.value_type.__name__) + ")\n" \
                       + self._indent(item.help, num) + "\n" \
-                      + self._indent("default: ", num) + repr(item.def_value)
+                      + self._indent("default: ", num) + repr(item.def_value) + "\n\n"
 
         return result
