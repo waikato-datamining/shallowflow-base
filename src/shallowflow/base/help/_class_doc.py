@@ -36,7 +36,7 @@ def markdown_class_doc(conf, output_dir):
                     if first:
                         readme_module += "\n## %s\n\n" % superclass
                         first = False
-                    readme_module += "* [%s](%s/README.md)\n" % (get_class_name(cls), f)
+                    readme_module += "* [%s](%s)\n" % (get_class_name(cls), f)
             # write README for classes
             with open(os.path.join(dir, "README.md"), "w") as f:
                 f.write(readme_module)
