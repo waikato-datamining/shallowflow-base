@@ -20,7 +20,7 @@ def markdown_class_doc(conf, output_dir):
         readme_modules = "# Class documentation\n\n"
         for module in c["modules"]:
             print("Processing module: %s" % module)
-            readme_modules += "* [%s](%s)\n" % (module, module)
+            readme_modules += "* [%s](%s/README.md)\n" % (module, module)
             m = c["modules"][module]
             dir = os.path.join(output_dir, module)
             if not os.path.exists(dir):
@@ -36,7 +36,7 @@ def markdown_class_doc(conf, output_dir):
                     if first:
                         readme_module += "\n## %s\n\n" % superclass
                         first = False
-                    readme_module += "* [%s](%s)\n" % (get_class_name(cls), f)
+                    readme_module += "* [%s](%s/README.md)\n" % (get_class_name(cls), f)
             # write README for classes
             with open(os.path.join(dir, "README.md"), "w") as f:
                 f.write(readme_module)
