@@ -1,3 +1,4 @@
+from shallowflow.api.config import Option, AbstractOptionHandler
 from shallowflow.api.help import AbstractHelpGenerator
 from shallowflow.api.actor import Actor, is_standalone, is_source, is_sink, is_transformer
 from shallowflow.api.compatibility import Unknown
@@ -53,6 +54,19 @@ class Markdown(AbstractHelpGenerator):
         else:
             return get_class_name(t)
 
+    def _defvalue_to_str(self, v):
+        """
+        Turns the default value into a string.
+
+        :param v: the value to convert
+        :return: the generated string
+        :rtype: str
+        """
+        if isinstance(v, AbstractOptionHandler):
+            return get_class_name(v)
+        else:
+            return repr(v)
+
     def _do_generate(self, handler):
         """
         Performs the actual generation.
@@ -88,7 +102,7 @@ class Markdown(AbstractHelpGenerator):
             result += "* " + item.name + " (" + str(item.value_type.__name__) + ")\n"
             result += "\n"
             result += "  * " + item.help + "\n"
-            result += "  * default: " + repr(item.def_value) + "\n"
+            result += "  * default: " + self._defvalue_to_str(item.def_value) + "\n"
             result += "\n"
 
         return result

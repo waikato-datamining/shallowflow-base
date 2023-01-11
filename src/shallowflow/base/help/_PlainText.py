@@ -1,4 +1,4 @@
-from shallowflow.api.config import Option
+from shallowflow.api.config import Option, AbstractOptionHandler
 from shallowflow.api.help import AbstractHelpGenerator
 from shallowflow.api.actor import Actor, is_standalone, is_source, is_sink, is_transformer
 from shallowflow.api.compatibility import Unknown
@@ -84,6 +84,19 @@ class PlainText(AbstractHelpGenerator):
         else:
             return get_class_name(t)
 
+    def _defvalue_to_str(self, v):
+        """
+        Turns the default value into a string.
+
+        :param v: the value to convert
+        :return: the generated string
+        :rtype: str
+        """
+        if isinstance(v, AbstractOptionHandler):
+            return get_class_name(v)
+        else:
+            return repr(v)
+
     def _do_generate(self, handler):
         """
         Performs the actual generation.
@@ -122,6 +135,6 @@ class PlainText(AbstractHelpGenerator):
         for item in handler.option_manager.options():
             result += item.name + " (" + str(item.value_type.__name__) + ")\n" \
                       + self._indent(item.help, num) + "\n" \
-                      + self._indent("default: ", num) + repr(item.def_value) + "\n\n"
+                      + self._indent("default: ", num) + self._defvalue_to_str(item.def_value) + "\n\n"
 
         return result
