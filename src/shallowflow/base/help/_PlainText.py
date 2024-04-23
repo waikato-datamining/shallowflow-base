@@ -1,8 +1,8 @@
-from shallowflow.api.config import Option, AbstractOptionHandler
-from shallowflow.api.help import AbstractHelpGenerator
+from coed.config import Option, AbstractOptionHandler
+from coed.help import AbstractHelpGenerator
 from shallowflow.api.actor import Actor, is_standalone, is_source, is_sink, is_transformer
 from shallowflow.api.compatibility import Unknown
-from shallowflow.api.config import get_class_name
+from coed.config import get_class_name
 
 
 class PlainText(AbstractHelpGenerator):
@@ -135,6 +135,13 @@ class PlainText(AbstractHelpGenerator):
         for item in handler.option_manager.options():
             result += item.name + " (" + str(item.value_type.__name__) + ")\n" \
                       + self._indent(item.help, num) + "\n" \
-                      + self._indent("default: ", num) + self._defvalue_to_str(item.def_value) + "\n\n"
+                      + self._indent("default: ", num) + self._defvalue_to_str(item.def_value) + "\n"
+            if item.lower is not None:
+                result += self._indent("lower: ", num) + str(item.lower) + "\n"
+            if item.upper is not None:
+                result += self._indent("upper: ", num) + str(item.upper) + "\n"
+            if item.choices is not None:
+                result += self._indent("choices: ", num) + str(item.choices) + "\n"
+            result += "\n"
 
         return result

@@ -1,5 +1,5 @@
 import numexpr
-from shallowflow.api.config import Option
+from coed.config import Option
 from shallowflow.api.condition import AbstractBooleanCondition
 
 

@@ -1,4 +1,4 @@
-from shallowflow.api.config import Option
+from coed.config import Option
 from shallowflow.api.transformer import AbstractSimpleTransformer
 from shallowflow.base.conversions import AbstractConversion, PassThrough
 

@@ -1,5 +1,5 @@
 from shallowflow.api.condition import AbstractBooleanCondition
-from shallowflow.api.config import Option
+from coed.config import Option
 
 
 class AlwaysTrue(AbstractBooleanCondition):

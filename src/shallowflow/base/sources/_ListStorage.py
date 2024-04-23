@@ -1,7 +1,7 @@
 import re
 from shallowflow.api.storage import StorageUser
 from shallowflow.api.source import AbstractListOutputSource
-from shallowflow.api.config import Option
+from coed.config import Option
 
 
 class ListStorage(AbstractListOutputSource, StorageUser):

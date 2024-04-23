@@ -1,6 +1,6 @@
 from shallowflow.api.actor import InputConsumer
 from shallowflow.api.control import MutableActorHandler, ActorHandlerInfo
-from shallowflow.api.config import Option
+from coed.config import Option
 from shallowflow.api.condition import AbstractBooleanCondition
 from shallowflow.api.compatibility import Unknown
 from shallowflow.base.directors import SequentialDirector

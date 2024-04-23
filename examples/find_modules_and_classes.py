@@ -1,6 +1,6 @@
-from shallowflow.api.class_utils import find_module_names, find_class_names
+from coed.class_utils import find_module_names, find_class_names
 from shallowflow.api.actor import Actor
-from shallowflow.api.config import AbstractOptionHandler
+from coed.config import AbstractOptionHandler
 
 # lists all the shallowflow-related modules
 print("\n--> Module names\n")

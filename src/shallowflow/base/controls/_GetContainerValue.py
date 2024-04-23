@@ -1,5 +1,5 @@
 from shallowflow.api.actor import InputConsumer
-from shallowflow.api.config import Option, get_class_name
+from coed.config import Option, get_class_name
 from shallowflow.api.container import AbstractContainer
 from shallowflow.api.control import ActorHandlerInfo
 from shallowflow.base.directors import SequentialDirector

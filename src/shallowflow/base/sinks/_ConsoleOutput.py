@@ -1,5 +1,5 @@
 from shallowflow.api.sink import AbstractSimpleSink
-from shallowflow.api.config import Option
+from coed.config import Option
 
 
 class ConsoleOutput(AbstractSimpleSink):

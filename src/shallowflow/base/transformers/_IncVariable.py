@@ -1,6 +1,6 @@
 from shallowflow.api.transformer import AbstractSimpleTransformer
-from shallowflow.api.config import Option
-from shallowflow.api.vars import VariableName
+from coed.config import Option
+from coed.vars import VariableName
 from shallowflow.api.compatibility import Unknown
 
 

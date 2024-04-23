@@ -1,7 +1,7 @@
 from shallowflow.api.director import AbstractDirector
 from shallowflow.api.actor import InputConsumer, OutputProducer, is_source, is_sink, is_standalone
 from shallowflow.api.compatibility import is_compatible
-from shallowflow.api.class_utils import get_class_name
+from coed.class_utils import get_class_name
 
 
 class SequentialDirector(AbstractDirector):

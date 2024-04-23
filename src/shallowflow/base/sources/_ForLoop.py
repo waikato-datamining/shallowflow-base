@@ -1,5 +1,5 @@
 from shallowflow.api.source import AbstractListOutputSource
-from shallowflow.api.config import Option
+from coed.config import Option
 
 
 class ForLoop(AbstractListOutputSource):

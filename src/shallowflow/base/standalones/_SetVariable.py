@@ -1,7 +1,7 @@
 import os
 from shallowflow.api.actor import Actor
-from shallowflow.api.config import Option
-from shallowflow.api.vars import VariableName
+from coed.config import Option
+from coed.vars import VariableName
 
 
 class SetVariable(Actor):

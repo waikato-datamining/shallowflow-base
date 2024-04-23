@@ -1,8 +1,8 @@
-from shallowflow.api.config import Option, AbstractOptionHandler
-from shallowflow.api.help import AbstractHelpGenerator
+from coed.config import Option, AbstractOptionHandler
+from coed.help import AbstractHelpGenerator
 from shallowflow.api.actor import Actor, is_standalone, is_source, is_sink, is_transformer
 from shallowflow.api.compatibility import Unknown
-from shallowflow.api.config import get_class_name
+from coed.config import get_class_name
 
 
 class Markdown(AbstractHelpGenerator):
@@ -103,6 +103,12 @@ class Markdown(AbstractHelpGenerator):
             result += "\n"
             result += "  * " + item.help + "\n"
             result += "  * default: " + self._defvalue_to_str(item.def_value) + "\n"
+            if item.lower is not None:
+                result += "  * lower: " + str(item.lower) + "\n"
+            if item.upper is not None:
+                result += "  * upper: " + str(item.upper) + "\n"
+            if item.choices is not None:
+                result += "  * choices: " + str(item.choices) + "\n"
             result += "\n"
 
         return result

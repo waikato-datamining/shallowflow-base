@@ -1,7 +1,7 @@
 import json
 import os
-from shallowflow.api.class_utils import get_class_name, class_name_to_type
-from shallowflow.api.help import class_hierarchy_help
+from coed.class_utils import get_class_name, class_name_to_type
+from coed.help import class_hierarchy_help
 from . import Markdown
 
 

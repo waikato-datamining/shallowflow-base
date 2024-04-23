@@ -1,4 +1,4 @@
-from shallowflow.api.config import Option
+from coed.config import Option
 from shallowflow.api.sink import AbstractSimpleSink
 from shallowflow.api.compatibility import Unknown
 

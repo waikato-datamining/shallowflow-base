@@ -5,7 +5,7 @@ from shallowflow.api.control import MutableActorHandler, ActorHandlerInfo
 from shallowflow.api.io import load_actor, get_reader_extensions, save_actor
 from shallowflow.api.scope import ScopeHandler
 from shallowflow.api.storage import StorageHandler, Storage
-from shallowflow.api.vars import Variables
+from coed.vars import Variables
 from shallowflow.base.directors import SequentialDirector
 
 

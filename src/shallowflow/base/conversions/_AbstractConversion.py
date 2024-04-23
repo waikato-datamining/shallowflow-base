@@ -1,6 +1,6 @@
-from shallowflow.api.config import AbstractOptionHandler, optionhandler_to_dict, dict_to_optionhandler
+from coed.config import AbstractOptionHandler, optionhandler_to_dict, dict_to_optionhandler
 from shallowflow.api.actor import FlowContextHandler
-from shallowflow.api.serialization.objects import add_dict_writer, add_dict_reader
+from coed.serialization.objects import add_dict_writer, add_dict_reader
 
 
 class AbstractConversion(AbstractOptionHandler, FlowContextHandler):

@@ -1,5 +1,5 @@
 from time import sleep
-from shallowflow.api.config import Option
+from coed.config import Option
 from shallowflow.api.transformer import AbstractSimpleTransformer
 from shallowflow.api.compatibility import Unknown
 
