@@ -3,6 +3,7 @@ import os
 from coed.class_utils import get_class_name, class_name_to_type
 from coed.help import class_hierarchy_help
 from . import Markdown
+from shallowflow.registry import REGISTRY
 
 
 def markdown_class_doc(conf, output_dir):
@@ -28,7 +29,7 @@ def markdown_class_doc(conf, output_dir):
             regexp = m["module_regexp"]
             readme_module = "# %s\n" % module
             for superclass in m["superclasses"]:
-                classes, files = class_hierarchy_help(class_name_to_type(superclass), generator, dir, module_regexp=regexp)
+                classes, files = class_hierarchy_help(REGISTRY, class_name_to_type(superclass), generator, dir, module_regexp=regexp)
                 first = True
                 for cls, f in zip(classes, files):
                     if f is None:

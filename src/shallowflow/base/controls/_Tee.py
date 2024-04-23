@@ -1,3 +1,4 @@
+import abc
 from shallowflow.api.condition import AbstractBooleanCondition
 from coed.config import Option
 from shallowflow.api.control import MutableActorHandler, ActorHandlerInfo
@@ -9,7 +10,7 @@ from shallowflow.base.conditions import AlwaysTrue
 STATE_INPUT = "input"
 
 
-class AbstractTee(MutableActorHandler, InputConsumer, OutputProducer):
+class AbstractTee(MutableActorHandler, InputConsumer, OutputProducer, abc.ABC):
     """
     Ancestor for Tee-like control actors.
     """

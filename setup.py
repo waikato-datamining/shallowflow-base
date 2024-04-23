@@ -40,7 +40,10 @@ setup(
     entry_points={
         "console_scripts": [
             "sf-runflow=shallowflow.base.controls._Flow:sys_main",
-        ]
+        ],
+        "class_lister": [
+            "sf.base=shallowflow.base.class_lister:list_classes",
+        ],
     },
     version="0.0.1",
     author='Peter Reutemann',

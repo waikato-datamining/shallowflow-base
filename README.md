@@ -16,8 +16,8 @@ pip install "git+https://github.com/waikato-datamining/shallowflow-base.git"
 
 ## Examples
 
+* [use registry](examples/use_registry.py)
 * [option handling](examples/option_handling.py)
-* [finding modules/classes](examples/find_modules_and_classes.py)
 * [listing files/dirs](examples/list_files.py)
 * [compatibility](examples/comp.py)
 * [listing files/dirs (flow)](examples/flow_listing_files.py)
