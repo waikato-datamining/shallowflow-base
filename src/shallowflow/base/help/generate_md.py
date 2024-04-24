@@ -40,6 +40,7 @@ def main(args=None):
     for superclass in superclasses:
         classes = REGISTRY.classes(superclass, fail_if_empty=False)
         if len(classes) == 0:
+            print("WARNING: no classes available for superclass '%s'" % superclass)
             continue
         readme.append("")
         readme.append("## %s" % superclass)

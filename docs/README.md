@@ -2,10 +2,15 @@
 
 ## shallowflow.api.actor.Actor
 * [shallowflow.base.controls.Branch](shallowflow.base.controls.Branch.md)
+* [shallowflow.base.controls.ConditionalTee](shallowflow.base.controls.ConditionalTee.md)
+* [shallowflow.base.controls.ConditionalTrigger](shallowflow.base.controls.ConditionalTrigger.md)
 * [shallowflow.base.controls.Flow](shallowflow.base.controls.Flow.md)
+* [shallowflow.base.controls.GetContainerValue](shallowflow.base.controls.GetContainerValue.md)
 * [shallowflow.base.controls.Sequence](shallowflow.base.controls.Sequence.md)
 * [shallowflow.base.controls.Sleep](shallowflow.base.controls.Sleep.md)
 * [shallowflow.base.controls.Stop](shallowflow.base.controls.Stop.md)
+* [shallowflow.base.controls.Tee](shallowflow.base.controls.Tee.md)
+* [shallowflow.base.controls.Trigger](shallowflow.base.controls.Trigger.md)
 * [shallowflow.base.controls.WhileLoop](shallowflow.base.controls.WhileLoop.md)
 * [shallowflow.base.sinks.CallableSink](shallowflow.base.sinks.CallableSink.md)
 * [shallowflow.base.sinks.ConsoleOutput](shallowflow.base.sinks.ConsoleOutput.md)
