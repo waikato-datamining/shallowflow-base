@@ -93,7 +93,7 @@ class AbstractTee(MutableActorHandler, InputConsumer, OutputProducer, abc.ABC):
         :return: the director
         :rtype: AbstractDirector
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def _can_execute_actors(self):
         """
@@ -111,7 +111,7 @@ class AbstractTee(MutableActorHandler, InputConsumer, OutputProducer, abc.ABC):
         :return: None if successful, otherwise error message
         :rtype: str
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def _post_execute(self):
         """

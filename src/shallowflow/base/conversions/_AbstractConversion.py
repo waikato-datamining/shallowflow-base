@@ -50,7 +50,7 @@ class AbstractConversion(AbstractOptionHandler, FlowContextHandler):
 
         :return: the type
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def generates(self):
         """
@@ -58,7 +58,7 @@ class AbstractConversion(AbstractOptionHandler, FlowContextHandler):
 
         :return: the type
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def _check(self, o):
         """
@@ -80,7 +80,7 @@ class AbstractConversion(AbstractOptionHandler, FlowContextHandler):
         :param o: the object to convert
         :return: the converted object
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def convert(self, o):
         """

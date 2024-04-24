@@ -40,6 +40,7 @@ setup(
     entry_points={
         "console_scripts": [
             "sf-runflow=shallowflow.base.controls._Flow:sys_main",
+            "sf-generate-md=shallowflow.base.help.generate_md:sys_main",
         ],
         "class_lister": [
             "sf.base=shallowflow.base.class_lister:list_classes",

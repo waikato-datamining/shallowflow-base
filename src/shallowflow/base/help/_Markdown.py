@@ -1,8 +1,8 @@
-from coed.config import Option, AbstractOptionHandler
+from coed.config import AbstractOptionHandler
+from coed.config import get_class_name
 from coed.help import AbstractHelpGenerator
 from shallowflow.api.actor import Actor, is_standalone, is_source, is_sink, is_transformer
 from shallowflow.api.compatibility import Unknown
-from coed.config import get_class_name
 
 
 class Markdown(AbstractHelpGenerator):
@@ -83,9 +83,10 @@ class Markdown(AbstractHelpGenerator):
         result += get_class_name(handler) + "\n"
         result += "\n"
 
-        result += "## Synopsis\n"
-        result += handler.description() + "\n"
-        result += "\n"
+        if hasattr(handler, "description"):
+            result += "## Synopsis\n"
+            result += handler.description() + "\n"
+            result += "\n"
 
         if isinstance(handler, Actor):
             result += "## Flow input/output\n"
@@ -97,18 +98,19 @@ class Markdown(AbstractHelpGenerator):
                 result += "output: " + ", ".join([self._type_to_str(x) for x in handler.generates()]) + "\n"
             result += "\n"
 
-        result += "## Options\n"
-        for item in handler.option_manager.options():
-            result += "* " + item.name + " (" + str(item.value_type.__name__) + ")\n"
-            result += "\n"
-            result += "  * " + item.help + "\n"
-            result += "  * default: " + self._defvalue_to_str(item.def_value) + "\n"
-            if item.lower is not None:
-                result += "  * lower: " + str(item.lower) + "\n"
-            if item.upper is not None:
-                result += "  * upper: " + str(item.upper) + "\n"
-            if item.choices is not None:
-                result += "  * choices: " + str(item.choices) + "\n"
-            result += "\n"
+        if isinstance(handler, AbstractOptionHandler):
+            result += "## Options\n"
+            for item in handler.option_manager.options():
+                result += "* " + item.name + " (" + str(item.value_type.__name__) + ")\n"
+                result += "\n"
+                result += "  * " + item.help + "\n"
+                result += "  * default: " + self._defvalue_to_str(item.def_value) + "\n"
+                if item.lower is not None:
+                    result += "  * lower: " + str(item.lower) + "\n"
+                if item.upper is not None:
+                    result += "  * upper: " + str(item.upper) + "\n"
+                if item.choices is not None:
+                    result += "  * choices: " + str(item.choices) + "\n"
+                result += "\n"
 
         return result
