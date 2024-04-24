@@ -9,6 +9,44 @@ Install via pip:
 pip install "git+https://github.com/waikato-datamining/shallowflow-base.git"
 ```
 
+## Tools
+
+### Execute flow
+
+```
+usage: sf-run-flow [-h] -f FILE [-v KEY=VALUE [KEY=VALUE ...]]
+
+Executes the specified flow.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f FILE, --flow FILE  the flow to execute, supported extensions: .json,
+                        .pkl, .yaml (default: None)
+  -v KEY=VALUE [KEY=VALUE ...], --variable KEY=VALUE [KEY=VALUE ...]
+                        For supplying variables to the flow. (default: None)
+```
+
+
+### Generate markdown documentation
+
+```
+usage: sf-generate-md [-h] [-t TITLE] -l MODULE:FUNC [MODULE:FUNC ...] -o DIR
+
+Generates Markdown documentation for the classes provided by the class lister.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -t TITLE, --title TITLE
+                        The title for the documentation. (default:
+                        shallowflow)
+  -l MODULE:FUNC [MODULE:FUNC ...], --class_lister MODULE:FUNC [MODULE:FUNC ...]
+                        The class lister to use for obtaining the classes to
+                        generate the help for; format:
+                        module_name:function_name. (default: None)
+  -o DIR, --output DIR  The directory to store the generated output in.
+                        (default: None)
+```
+
 ## Classes
 
 [Documentation](docs/README.md)
