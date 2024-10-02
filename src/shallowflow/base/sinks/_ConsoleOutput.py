@@ -40,5 +40,5 @@ class ConsoleOutput(AbstractSimpleSink):
         :return: None if successful, otherwise error message
         :rtype: str
         """
-        print(self.get("prefix") + str(self._input))
+        print(self.get("prefix") + str(self._input), flush=True)
         return None
