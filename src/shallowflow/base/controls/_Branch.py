@@ -1,6 +1,8 @@
+from concurrent.futures import ThreadPoolExecutor
 from shallowflow.api.control import MutableActorHandler, AbstractDirector, ActorHandlerInfo
 from shallowflow.api.transformer import InputConsumer
 from shallowflow.api.compatibility import Unknown, is_compatible
+from shallowflow.api.performance import actual_num_threads, num_threads_option
 
 STATE_INPUT = "input"
 
@@ -20,14 +22,25 @@ class BranchDirector(AbstractDirector):
         :rtype: str
         """
         result = None
-        for actor in actors:
-            if self.is_stopped:
-                break
-            if actor.is_skipped:
-                continue
-            result = actor.execute()
-            if result is not None:
-                break
+        num_threads = actual_num_threads(self._owner.get("num_threads"))
+        if num_threads <= 1:
+            for actor in actors:
+                if self.is_stopped:
+                    break
+                if actor.is_skipped:
+                    continue
+                result = actor.execute()
+                if result is not None:
+                    break
+        else:
+            with ThreadPoolExecutor(max_workers=num_threads) as executor:
+                for actor in actors:
+                    if self.is_stopped:
+                        break
+                    if actor.is_skipped:
+                        continue
+                    executor.submit(lambda: actor.execute())
+
         return result
 
 
@@ -44,6 +57,13 @@ class Branch(MutableActorHandler, InputConsumer):
         :rtype: str
         """
         return "Forwards the input data to all of its sub-actors."
+
+    def _define_options(self):
+        """
+        For configuring the options.
+        """
+        super()._define_options()
+        self._option_manager.add(num_threads_option())
 
     @property
     def actor_handler_info(self):
