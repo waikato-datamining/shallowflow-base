@@ -39,7 +39,8 @@ class BranchDirector(AbstractDirector):
                         break
                     if actor.is_skipped:
                         continue
-                    executor.submit(lambda: actor.execute())
+                    # don't use lambda!
+                    executor.submit(actor.execute)
 
         return result
 
