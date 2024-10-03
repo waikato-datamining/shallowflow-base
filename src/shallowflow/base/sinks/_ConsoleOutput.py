@@ -1,5 +1,8 @@
+import threading
 from shallowflow.api.sink import AbstractSimpleSink
 from coed.config import Option
+
+print_mutex = threading.Semaphore(1)
 
 
 class ConsoleOutput(AbstractSimpleSink):
@@ -40,5 +43,7 @@ class ConsoleOutput(AbstractSimpleSink):
         :return: None if successful, otherwise error message
         :rtype: str
         """
+        print_mutex.acquire()
         print(self.get("prefix") + str(self._input), flush=True)
+        print_mutex.release()
         return None
