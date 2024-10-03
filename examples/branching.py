@@ -15,7 +15,7 @@ for i in range(5):
 
 flow = Flow().manage([
     ForLoop(),
-    Branch().manage(branches)
+    Branch({"num_threads": -1}).manage(branches)
 ])
 
 msg = run_flow(flow, dump_file="./output/" + os.path.splitext(os.path.basename(__file__))[0] + ".json")
