@@ -13,7 +13,7 @@ def _read(f):
 
 
 setup(
-    name="shallowflow-base",
+    name="shallowflow_base",
     description="Base components for the Python 3 shallowflow workflow engine.",
     long_description=(
         _read('DESCRIPTION.rst') + b'\n' +
@@ -34,7 +34,7 @@ setup(
         "shallowflow",
     ],
     install_requires=[
-        "shallowflow-api",
+        "shallowflow_api",
         "numexpr",
     ],
     entry_points={
